@@ -203,8 +203,29 @@ status: complete
 ---
 ```
 
+### Step 8: Adversarial plan review (subagent)
+
+After writing the plan artifact, dispatch an **Opus subagent** to perform an adversarial
+review. This replaces the former standalone `/dw-05b-plan-review` skill.
+
+1. Read the file `plan-review-prompt.md` from **this skill's directory** (same directory as this SKILL.md)
+2. Dispatch a **foreground** Agent with:
+   - `model: "opus"`
+   - `description: "Adversarial plan review"`
+   - `prompt:` the contents of `plan-review-prompt.md`, prepended with:
+     ```
+     ARTIFACT_DIR=<the artifact directory from setup>
+     TOPIC_SLUG=<topic slug>
+     REPO=<repo>
+     ```
+3. When the subagent completes, read the `05b-plan-review.md` it wrote to the artifact directory
+4. Present the review verdict and findings to the user
+
 ## Completion
 
-1. Present full plan to user for review
-2. Update `.state.json` with `current_phase: 5, completed_phases: [1, 2, 3, 4, 5]`
-3. Instruct: "Plan ready. Optionally run `/dw-plan-review <topic-slug>` for an adversarial review. When ready, run `/dw-06-implement <topic-slug>` in a **fresh conversation** to execute this plan."
+1. Present the plan review results to the user
+2. Update `.state.json` with `current_phase: 5, completed_phases: [1, 2, 3, 4, 5, "plan_review"]`
+3. Based on the review verdict:
+   - **APPROVED:** "Plan and review complete. No blocking issues. Proceed with `/dw-06-implement <topic-slug>` in a fresh conversation."
+   - **APPROVED WITH CONDITIONS:** "Plan review found Important issues that should be addressed. Review the findings above and update `05-plan.md`, then proceed to implementation."
+   - **REVISE:** "Plan review found Critical issues. Address the findings above and update `05-plan.md` before proceeding. Re-run `/dw-05-plan <topic-slug>` after revisions."

@@ -1,34 +1,13 @@
----
-name: dw-05b-plan-review
-description: "Use when deep-work Phase 5 plan is complete and needs adversarial review before implementation. Reviews plan for requirements gaps, logic bugs, security, performance, resilience, and code quality concerns."
----
+# Adversarial Plan Review
 
-# Phase 5b: Adversarial Plan Review
-
-Perform an independent, adversarial review of a completed implementation plan.
+You are performing an independent, adversarial review of a completed implementation plan.
 Assume the plan has gaps until proven otherwise. Your job is to find problems,
 not confirm the plan is good.
 
-**Announce at start:** "Starting deep-work Phase 5b: Adversarial Plan Review."
+## Inputs
 
-## Setup
-
-1. Run `./setup.sh "$ARGUMENTS"` and parse stdout for `REPO`, `TOPIC_SLUG`, `ARTIFACT_DIR`.
-   - If the script exits 2 (`MISSING_SLUG` on stderr), ask user via AskUserQuestion for the topic slug, then re-run with the slug.
-
-## Pre-flight Validation
-
-- `00-ticket.md` exists → if not: "Ticket not found. Complete Phases 1-5 first." **Stop.**
-- `02-research.md` exists → if not: "Research not found. Complete Phases 1-5 first." **Stop.**
-- `03-design-discussion.md` exists → if not: "Design decisions not found. Complete Phases 1-5 first." **Stop.**
-- `04-structure-outline.md` exists → if not: "Outline not found. Complete Phases 1-5 first." **Stop.**
-- `05-plan.md` exists → if not: "Plan not found. Complete Phase 5 first." **Stop.**
-
-## Process
-
-### Step 1: Load all context
-
-Read all artifacts in order — build a complete mental model before reviewing:
+You will be given an `ARTIFACT_DIR` path containing all deep-work artifacts. Read them
+in this order to build a complete mental model before reviewing:
 
 1. `00-ticket.md` — original requirements and acceptance criteria
 2. `02-research.md` — codebase findings, patterns, constraints
@@ -36,12 +15,14 @@ Read all artifacts in order — build a complete mental model before reviewing:
 4. `04-structure-outline.md` — phase structure, risk register, scope guards
 5. `05-plan.md` — the plan under review
 
-### Step 2: Build requirements checklist
+## Process
+
+### Step 1: Build requirements checklist
 
 Extract every requirement and acceptance criterion from `00-ticket.md`. Number them
 for traceability. These are the contract the plan must fulfill.
 
-### Step 3: Review the plan
+### Step 2: Review the plan
 
 Review the plan against each category below. For each finding, reference the specific
 task number (e.g., "Task 2.3") and explain the concrete impact.
@@ -70,7 +51,7 @@ task number (e.g., "Task 2.3") and explain the concrete impact.
 | **Code Best Practices** | Patterns from `03-design-discussion.md` actually followed in plan tasks. DRY violations across tasks. Separation of concerns. Error handling consistency. |
 | **Testability** | Planned tests cover the right invariants. Missing edge case tests. Integration test coverage for failure modes. Test isolation — no shared mutable state between tests. |
 
-### Step 4: Classify findings
+### Step 3: Classify findings
 
 Every finding gets ONE severity:
 
@@ -87,7 +68,7 @@ Every finding gets ONE severity:
 - If a category has no findings, omit it from the report — don't pad with "looks good"
 - Do not re-litigate design decisions from `03-design-discussion.md` — those are settled
 
-### Step 5: Write review artifact
+### Step 4: Write review artifact
 
 Write `05b-plan-review.md` to the artifact directory.
 
@@ -156,11 +137,9 @@ advisory_count: <N>
 ```
 ````
 
-## Completion
+### Step 5: Report results
 
-1. Present the review to the user
-2. Update `.state.json`: add `"plan_review"` to `completed_phases` if not present
-3. Based on verdict:
-   - **APPROVED:** "Plan review complete. No blocking issues. Proceed with `/dw-06-implement <topic-slug>` in a fresh conversation."
-   - **APPROVED WITH CONDITIONS:** "Plan review found Important issues that should be addressed. Review the findings above and update `05-plan.md`, then proceed to implementation."
-   - **REVISE:** "Plan review found Critical issues. Address the findings above and update `05-plan.md` before proceeding. Re-run `/dw-05b-plan-review <topic-slug>` after revisions if desired."
+After writing the artifact, report back with:
+1. The verdict (APPROVED / APPROVED WITH CONDITIONS / REVISE)
+2. Counts: critical, important, advisory
+3. A one-line summary of the most significant finding (if any)

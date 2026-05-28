@@ -5,12 +5,12 @@ set -euo pipefail
 
 REPO_ROOT="$(cd "$(dirname "$0")/.." && pwd)"
 
-DW_SKILLS=(deep-work dw-01-research-questions dw-02-research dw-03-design-discussion dw-04-outline dw-05-plan dw-05b-plan-review dw-06-implement)
+DW_SKILLS=(deep-work dw-01-research-questions dw-02-research dw-03-design-discussion dw-04-outline dw-05-plan dw-06-implement)
 RPI_SKILLS=(rpi-research rpi-plan rpi-implement)
 AGENTS=(codebase-analyzer.md codebase-locator.md codebase-pattern-finder.md)
 
 # Skills that reference setup.sh (all except deep-work, which is docs-only)
-SETUP_CONSUMERS=(dw-01-research-questions dw-02-research dw-03-design-discussion dw-04-outline dw-05-plan dw-05b-plan-review dw-06-implement rpi-research rpi-plan rpi-implement)
+SETUP_CONSUMERS=(dw-01-research-questions dw-02-research dw-03-design-discussion dw-04-outline dw-05-plan dw-06-implement rpi-research rpi-plan rpi-implement)
 
 sync_plugin() {
     local plugin_name="$1"

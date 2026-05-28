@@ -7,10 +7,10 @@ REPO_ROOT="$(cd "$(dirname "$0")" && pwd)"
 CLAUDE_DIR="$HOME/.claude"
 SUBSET="${1:-all}"
 
-DW_SKILLS=(deep-work dw-01-research-questions dw-02-research dw-03-design-discussion dw-04-outline dw-05-plan dw-05b-plan-review dw-06-implement)
+DW_SKILLS=(deep-work dw-01-research-questions dw-02-research dw-03-design-discussion dw-04-outline dw-05-plan dw-06-implement)
 RPI_SKILLS=(rpi-research rpi-plan rpi-implement)
 AGENTS=(codebase-analyzer.md codebase-locator.md codebase-pattern-finder.md)
-SETUP_CONSUMERS=(dw-01-research-questions dw-02-research dw-03-design-discussion dw-04-outline dw-05-plan dw-05b-plan-review dw-06-implement rpi-research rpi-plan rpi-implement)
+SETUP_CONSUMERS=(dw-01-research-questions dw-02-research dw-03-design-discussion dw-04-outline dw-05-plan dw-06-implement rpi-research rpi-plan rpi-implement)
 
 install_skills() {
     local -a skill_list=("$@")

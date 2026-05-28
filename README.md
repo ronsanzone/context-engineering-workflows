@@ -12,7 +12,7 @@ Both pipelines produce durable artifacts at `~/notes/context-engineering/<repo>/
 ### Option 1: Raw Install (copy to ~/.claude/)
 
 ```bash
-git clone <repo-url> ~/code/context-engineering-workflows
+git clone git@github.com:ronsanzone/context-engineering-workflows.git ~/code/context-engineering-workflows
 cd ~/code/context-engineering-workflows
 
 # Install everything
@@ -29,7 +29,7 @@ Skills are copied to `~/.claude/skills/` and agents to `~/.claude/agents/`. To u
 
 ```bash
 # Add the marketplace (one-time)
-/plugin marketplace add <owner>/context-engineering-workflows
+/plugin marketplace add ronsanzone/context-engineering-workflows
 
 # Install one or both pipelines
 /plugin install rpi@context-engineering-workflows
@@ -55,8 +55,7 @@ To update, run `/plugin marketplace update context-engineering-workflows`, then 
 /dw-02-research <slug>                   # Investigate (bias firewall — no prompt access)
 /dw-03-design-discussion <slug>          # Explore design options
 /dw-04-outline <slug>                    # Map decisions to file changes
-/dw-05-plan <slug>                       # Detailed implementation plan
-/dw-05b-plan-review <slug>              # Adversarial review (optional)
+/dw-05-plan <slug>                       # Detailed implementation plan + adversarial review
 /dw-06-implement <slug>                  # Execute the plan
 ```
 
@@ -103,7 +102,3 @@ After cloning, configure the hook:
 ```bash
 git config core.hooksPath .githooks
 ```
-
-### External Dependencies
-
-Both implement skills (`dw-06-implement`, `rpi-implement`) invoke `/quick-review` for end-of-session code review. This skill is **not included** in this repo and must be installed separately.
