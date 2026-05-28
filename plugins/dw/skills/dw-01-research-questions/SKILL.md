@@ -45,7 +45,7 @@ Identify the key nouns, systems, and actions mentioned in the prompt. These are 
 Gather lightweight structural context (NOT deep implementation details):
 - List root directory structure
 - Read CLAUDE.md files for project context and conventions
-- Dispatch a codebase-locator agent: "Find files and directories related to: <key nouns/systems from prompt>. Return locations grouped by purpose."
+- Dispatch a dw:codebase-locator agent: "Find files and directories related to: <key nouns/systems from prompt>. Return locations grouped by purpose."
 
 ### Step 3: Generate research questions
 Generate 5-20 questions. EVERY question must be:

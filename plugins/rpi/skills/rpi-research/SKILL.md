@@ -45,9 +45,9 @@ If the query is solution-shaped ("how should we implement X", "replace A with B"
 ### Step 2: Decompose into research areas
 
 Break the query into 3-6 composable research areas. Examples:
-- "Where does X live?" → `codebase-locator`
-- "How does Y work?" → `codebase-analyzer`
-- "Is there a pattern like Z?" → `codebase-pattern-finder`
+- "Where does X live?" → `rpi:codebase-locator`
+- "How does Y work?" → `rpi:codebase-analyzer`
+- "Is there a pattern like Z?" → `rpi:codebase-pattern-finder`
 - "What's the history of W?" → `git log` / `git blame` + `mcp__glean_default__search`
 - "How do other systems do this?" → `web-search-researcher` (only if external context genuinely helps)
 
@@ -60,9 +60,9 @@ In a **single message**, dispatch one `Agent` call per research area. Prefix eve
 > "You are documenting what exists. Do NOT critique, suggest improvements, or perform root-cause analysis. Return file:line references for every claim."
 
 **Codebase routing**:
-- `codebase-locator` — find files/components by name or purpose
-- `codebase-analyzer` — explain how a specific path works
-- `codebase-pattern-finder` — find similar implementations to model after
+- `rpi:codebase-locator` — find files/components by name or purpose
+- `rpi:codebase-analyzer` — explain how a specific path works
+- `rpi:codebase-pattern-finder` — find similar implementations to model after
 
 **External routing:**
 - `web-search-researcher` — only when external docs/articles are genuinely needed; instruct it to return links

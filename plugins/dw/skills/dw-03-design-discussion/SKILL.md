@@ -88,7 +88,7 @@ questions where:
 **If gaps exist:**
 1. For each gap, formulate a specific, bounded lookup — a file to read, a pattern
    to grep, or a function signature to check. No open-ended exploration.
-2. Execute the lookups using Read/Grep/Glob (or dispatch a codebase-locator agent
+2. Execute the lookups using Read/Grep/Glob (or dispatch a dw:codebase-locator agent
    for broader searches). Cap at **5 lookups total** — this is targeted, not a
    second research phase.
 3. For each finding, create additional design questions in a separate

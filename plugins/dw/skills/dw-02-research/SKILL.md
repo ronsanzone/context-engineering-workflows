@@ -55,12 +55,12 @@ Extract numbered questions from pasted text. Identify the category of each.
 
 | Category | Agent Type |
 |----------|-----------|
-| Subsystem understanding | codebase-analyzer |
-| Code tracing | codebase-analyzer |
-| Pattern discovery | codebase-pattern-finder |
-| Dependency mapping | codebase-locator |
-| Boundary identification | codebase-locator → codebase-analyzer |
-| Constraint discovery | codebase-pattern-finder |
+| Subsystem understanding | dw:codebase-analyzer |
+| Code tracing | dw:codebase-analyzer |
+| Pattern discovery | dw:codebase-pattern-finder |
+| Dependency mapping | dw:codebase-locator |
+| Boundary identification | dw:codebase-locator → dw:codebase-analyzer |
+| Constraint discovery | dw:codebase-pattern-finder |
 
 ### Step 3: Dispatch agents
 For each agent, prepend this objectivity wrapper to the task prompt:
@@ -127,7 +127,7 @@ status: complete
 
 ### Q1: <question>
 **Status:** COMPLETE
-**Sources:** codebase-analyzer
+**Sources:** dw:codebase-analyzer
 
 <detailed findings with file:line references>
 

@@ -23,12 +23,19 @@ sync_plugin() {
     rm -rf "$plugin_dir/skills" "$plugin_dir/agents"
     mkdir -p "$plugin_dir/skills" "$plugin_dir/agents"
 
-    # Copy skills
+    # Copy skills and rewrite agent references with plugin prefix
     for skill in "${skill_list[@]}"; do
         local src="$REPO_ROOT/skills/$skill"
         local dest="$plugin_dir/skills/$skill"
         if [ -d "$src" ]; then
             cp -R "$src" "$dest"
+            # Prefix agent names so skills dispatch the plugin's agents, not built-ins
+            local agent_names
+            agent_names=$(printf '%s\n' "${AGENTS[@]}" | sed 's/\.md$//')
+            for agent_name in $agent_names; do
+                find "$dest" -name '*.md' -exec \
+                    sed -i '' "s|${agent_name}|${plugin_name}:${agent_name}|g" {} +
+            done
         fi
     done
 
