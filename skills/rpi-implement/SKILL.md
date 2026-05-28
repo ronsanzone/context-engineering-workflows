@@ -13,7 +13,7 @@ Execute a `/rpi-plan` plan by dispatching a fresh subagent per task with two-sta
 
 ## Setup
 
-1. Run `./setup.sh "$ARGUMENTS"` and parse stdout for `REPO`, `TOPIC_SLUG`, `ARTIFACT_DIR`.
+1. Run `"$SKILL_BASE_DIR/setup.sh" "$ARGUMENTS"` and parse stdout for `REPO`, `TOPIC_SLUG`, `ARTIFACT_DIR`. `$SKILL_BASE_DIR` is the "Base directory for this skill" path shown at the top of this prompt.
    - If the script exits 2, `AskUserQuestion` for a slug.
 
 ## Pre-flight Validation

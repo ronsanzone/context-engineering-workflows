@@ -22,7 +22,7 @@ This stance is what makes the artifact reusable by `/rpi-plan` (and future reade
 
 ## Setup
 
-1. Run `./setup.sh "<slug>"` (extract `<slug>` from `$ARGUMENTS`; everything after the slug is the research query). Parse stdout for `REPO`, `TOPIC_SLUG`, `ARTIFACT_DIR`.
+1. Run `"$SKILL_BASE_DIR/setup.sh" "<slug>"` (extract `<slug>` from `$ARGUMENTS`; everything after the slug is the research query). Parse stdout for `REPO`, `TOPIC_SLUG`, `ARTIFACT_DIR`. `$SKILL_BASE_DIR` is the "Base directory for this skill" path shown at the top of this prompt.
    - If the script exits 2 (`MISSING_SLUG`), use `AskUserQuestion` to ask for a slug, then re-run.
 
 ## Pre-flight Validation

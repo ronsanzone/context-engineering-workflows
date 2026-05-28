@@ -22,7 +22,7 @@ Each gate uses `AskUserQuestion`.
 
 ## Setup
 
-1. Run `./setup.sh "<slug>"` (extract `<slug>` from `$ARGUMENTS`). Parse stdout for `REPO`, `TOPIC_SLUG`, `ARTIFACT_DIR`.
+1. Run `"$SKILL_BASE_DIR/setup.sh" "<slug>"` (extract `<slug>` from `$ARGUMENTS`). Parse stdout for `REPO`, `TOPIC_SLUG`, `ARTIFACT_DIR`. `$SKILL_BASE_DIR` is the "Base directory for this skill" path shown at the top of this prompt.
    - If exit 2, `AskUserQuestion` for slug.
 
 ## Pre-flight Validation

@@ -25,7 +25,7 @@ You MUST:
 
 ## Setup
 
-1. Run `./setup.sh "$ARGUMENTS"` and parse stdout for `REPO`, `TOPIC_SLUG`, `ARTIFACT_DIR`.
+1. Run `"$SKILL_BASE_DIR/setup.sh" "$ARGUMENTS"` and parse stdout for `REPO`, `TOPIC_SLUG`, `ARTIFACT_DIR`. `$SKILL_BASE_DIR` is the "Base directory for this skill" path shown at the top of this prompt.
    - If the script exits 2 (`MISSING_SLUG` on stderr), ask user via AskUserQuestion for the topic slug, then re-run with the slug.
 
 ## Pre-flight Validation
@@ -35,7 +35,7 @@ You MUST:
 3. **Do NOT read `00-ticket.md`** — only check existence via bash `test -f`.
 4. **Extract research questions** — run the co-located extraction script:
    ```bash
-   ./extract-research-questions.sh <repo> <topic-slug>
+   "$SKILL_BASE_DIR/extract-research-questions.sh" <repo> <topic-slug>
    ```
    This script outputs ONLY the `## Research Questions` section from `01-research-questions.md`. It never exposes the original prompt.
    - If it exits non-zero → display its stderr message and **Stop.**

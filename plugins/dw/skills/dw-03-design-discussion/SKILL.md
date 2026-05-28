@@ -13,7 +13,7 @@ the prompt safely re-enters the pipeline here.
 
 ## Setup
 
-1. Run `./setup.sh "$ARGUMENTS"` and parse stdout for `REPO`, `TOPIC_SLUG`, `ARTIFACT_DIR`.
+1. Run `"$SKILL_BASE_DIR/setup.sh" "$ARGUMENTS"` and parse stdout for `REPO`, `TOPIC_SLUG`, `ARTIFACT_DIR`. `$SKILL_BASE_DIR` is the "Base directory for this skill" path shown at the top of this prompt.
    - If the script exits 2 (`MISSING_SLUG` on stderr), ask user via AskUserQuestion for the topic slug, then re-run with the slug.
    - If `$ARGUMENTS` contains `--auto`, enable **auto mode** (accept all recommendations without interactive prompts).
 
