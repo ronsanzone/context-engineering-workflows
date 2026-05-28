@@ -1,7 +1,6 @@
 {
   "name": "rpi",
   "description": "RPI pipeline: a streamlined 3-phase research-plan-implement workflow. Produces durable research artifacts and dw-05-format implementation plans.",
-  "version": "1.0.0",
   "author": {
     "name": "Ron Sanzone"
   },
