@@ -1,0 +1,18 @@
+{
+  "name": "context-engineering-workflows",
+  "owner": {
+    "name": "Ron Sanzone"
+  },
+  "plugins": [
+    {
+      "name": "rpi",
+      "source": "./plugins/rpi",
+      "description": "RPI pipeline: research, plan, implement — a streamlined 3-phase workflow for feature development"
+    },
+    {
+      "name": "dw",
+      "source": "./plugins/dw",
+      "description": "Deep-work pipeline: 6-phase structured workflow separating research from solutioning"
+    }
+  ]
+}

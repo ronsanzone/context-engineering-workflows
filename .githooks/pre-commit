@@ -1,0 +1,7 @@
+#!/usr/bin/env bash
+# Pre-commit hook: sync source-of-truth files into plugins/ directory
+set -euo pipefail
+
+REPO_ROOT="$(git rev-parse --show-toplevel)"
+"$REPO_ROOT/scripts/sync-plugins.sh"
+git add "$REPO_ROOT/plugins/"
