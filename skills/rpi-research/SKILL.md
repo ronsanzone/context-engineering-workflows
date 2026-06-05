@@ -1,6 +1,6 @@
 ---
 name: rpi-research
-description: "Use when starting the RPI flow and you want to deeply understand a question, system, or feature by reading the codebase before planning.""""""" 
+description: "Use when starting the RPI flow and you want to deeply understand a question, system, or feature by reading the codebase before planning."
 ---
 
 Conduct comprehensive read-only research on a question or feature by dispatching parallel sub-agents and synthesizing findings into a single durable research document.
@@ -16,7 +16,10 @@ You and all dispatched sub-agents are documenting **what exists**, not what shou
 - DO NOT propose changes, fixes, refactors, or improvements unless the user explicitly asks.
 - DO NOT critique the implementation, surface "issues", or recommend alternatives.
 - DO describe what exists, where, how it works, and how pieces connect.
+- DO trace reachability. "X is called by Y" is incomplete — document the chain to a **production entry point** (request handler, scheduler, cron, startup wiring). Whether code runs in production is a fact about what exists, not a critique. Code with no path from an entry point is **dead**, and saying so is documentation.
 - DO surface open questions in the artifact's Open Questions section — but as questions, not as veiled critique.
+
+**Don't confuse "don't recommend fixes" (correct) with "don't question whether code runs" (harmful).** Determining that something is dead, unused, or unreachable is documenting what exists — it belongs in the artifact. Only the *prescription* ("so remove it") is out of scope.
 
 This stance is what makes the artifact reusable by `/rpi-plan` (and future readers) without baked-in bias.
 
@@ -42,6 +45,8 @@ This stance is what makes the artifact reusable by `/rpi-plan` (and future reade
 
 If the query is solution-shaped ("how should we implement X", "replace A with B"), normalize it into neutral codebase questions before decomposition: what exists, where it is used, how it works, and what patterns already exist. Preserve the original query in the artifact, but dispatch research on the neutralized questions.
 
+A query that asks you to **validate, confirm, or check an existing doc, plan, decision, or proposed solution is solution-shaped** even when phrased as a fact-check ("are these citations right?"). It is the most dangerous shape because it reads as documentary but pulls you toward confirming what you were handed. Re-frame to investigate the underlying problem *independently* — what exists, what is actually used, what the simplest explanation is — and actively seek evidence the existing solution is unnecessary or wrong. Confirming citations is not research.
+
 ### Step 2: Decompose into research areas
 
 Break the query into 3-6 composable research areas. Examples:
@@ -52,6 +57,8 @@ Break the query into 3-6 composable research areas. Examples:
 - "How do other systems do this?" → `web-search-researcher` (only if external context genuinely helps)
 
 Skip categories that don't apply. Don't pad with research areas that won't change the artifact.
+
+**Always include one altitude-raising area the query did not name** — e.g. "how is this subsystem driven in production today, and what did it replace / what is now legacy?" The query usually arrives at the altitude of the proposed change; the answer that reframes the problem often lives one level up. For any "is X used / can we remove X / is this path live" question, this area is **mandatory**, not optional.
 
 ### Step 3: Dispatch parallel sub-agents
 
@@ -74,6 +81,7 @@ Wait for all sub-agents to complete before synthesizing.
 
 - Prioritize live code findings over historical/doc findings as the source of truth.
 - Cross-reference: connect findings across components (e.g., "X calls Y at `file.ext:LINE` which then writes to Z").
+- **Live/used standard:** for any component you describe as live, used, active, or in-production, name the production entry point and the chain to it. Treat "live" as unproven until traced to ground — never infer it from the existence of a single caller. Apply equal tracing depth to components you expect to be live and ones you expect to be dead. (Asymmetric rigor — going deep only on what you assume is dead — is exactly how dead code gets mislabeled live.)
 - Verify file:line references that look suspicious by reading the actual file.
 - Identify open questions — things sub-agents couldn't answer or that need human judgment.
 
@@ -155,3 +163,6 @@ If the follow-up arrives in a fresh conversation, re-run `/rpi-research <slug> <
 - A sub-agent returns critique or suggestions instead of documentation — re-dispatch with the documentarian directive made explicit.
 - File:line references don't match the actual file — verify by reading; if wrong, dispatch a follow-up.
 - The question is actually "how should we" rather than "how does it" — neutralize it into code-answerable research questions before dispatching sub-agents.
+- The query is "validate/confirm <existing doc or plan>" — you will drift into confirming citations. Re-open the underlying problem as neutral questions and include at least one disconfirmation angle (what evidence would show the premise is false?).
+- Findings only confirm the input premise (you found just line-number drift; every claim "confirmed"). Real investigation of a non-trivial system usually surfaces at least one load-bearing surprise. State what you tried to disprove and why it held — and if you tried nothing, you validated rather than investigated.
+- A component is labeled live/used on the strength of a single caller, without the chain to a production entry point — trace it to ground before trusting the label.
